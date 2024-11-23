@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>送上祝福</title>
+    <style>
+        /* 背景设置为粉色 */
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #ffe0f0; /* 纯粉色背景 */
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        /* 主容器 */
+        .container {
+            position: relative;
+            z-index: 10;
+            padding-top: 50px;
+        }
+
+        /* 图片样式 */
+        img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(255, 20, 147, 0.4);
+        }
+
+        /* 闪烁标题 */
+        h1 {
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            animation: glow 2s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 5px #ff69b4, 0 0 10px #ff1493; }
+            50% { text-shadow: 0 0 20px #ff1493, 0 0 30px #ff69b4; }
+        }
+
+        /* 按钮样式 */
+        button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(255, 20, 147, 0.4);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background-color: #ff1493;
+        }
+
+        /* 动态祝福文字 */
+        .message {
+            margin-top: 20px;
+            font-size: 22px;
+            color: #ff1493; /* 深粉色 */
+            display: none;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 彩色气球样式 */
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            border-radius: 50%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: float 5s linear infinite;
+            opacity: 0.8;
+        }
+
+        /* 气球动画 */
+        @keyframes float {
+            0% {
+                transform: translateY(100vh);  /* 气球从屏幕底部出现 */
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh); /* 气球上升到屏幕顶部 */
+                opacity: 0; /* 气球消失 */
+            }
+        }
+
+        /* 底部标语 */
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            font-size: 16px;
+            color: #ff69b4;
+            font-weight: bold;
+            text-shadow: 0 0 3px #ff69b4, 0 0 5px #ff1493;
+        }
+    </style>
+</head>
+<body>
+    <!-- 主界面内容 -->
+    <div class="container">
+        <!-- 图片 -->
+        <img src="peach.png" alt="生日图像" id="peach-img">
+        <!-- 标题 -->
+        <h1>桃子</h1>
+        <!-- 按钮 -->
+        <button onclick="triggerBalloons()">点击</button>
+        <!-- 动态显示的祝福 -->
+        <p class="message" id="birthday-message">🎉 考公加油，成功上岸！ 💗</p>
+
+    </div>
+
+    <!-- 底部标语 -->
+    <div class="footer"><br><br>❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤<br></div>
+
+    <script>
+        // 显示祝福文字并触发气球特效
+        function triggerBalloons() {
+            const message = document.getElementById('birthday-message');
+            message.style.display = 'block';
+            createBalloons(30); // 生成30个气球
+        }
+
+        // 随机生成气球
+        function createBalloons(count) {
+            for (let i = 0; i < count; i++) {
+                const balloon = document.createElement('div');
+                balloon.classList.add('balloon');
+
+                // 随机颜色
+                balloon.style.background = randomColor();
+
+                // 随机位置
+                balloon.style.left = Math.random() * 100 + 'vw';
+
+                // 随机动画速度
+                balloon.style.animationDuration = Math.random() * 3 + 4 + 's';
+
+                // 将气球添加到页面
+                document.body.appendChild(balloon);
+
+                // 移除气球
+                setTimeout(() => balloon.remove(), 7000);
+            }
+        }
+
+        // 随机生成颜色
+        function randomColor() {
+            const colors = [
+                '#ff4500', '#ff1493', '#f39c12', '#e74c3c', '#ff6347', '#ff69b4',
+                '#ff6347', '#f0a0a0', '#e74c3c', '#fd5e53'
+            ];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+    </script>
+</body>
+</html>
